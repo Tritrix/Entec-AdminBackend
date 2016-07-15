@@ -1183,7 +1183,7 @@ class RegisterController extends AbstractActionController {
         header('Access-Control-Allow-Methods: GET, POST');
         header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
 
-        $body = $this->getRequest()->getContent();
+        $body = $this->getRequest()->getContent(); print_r($body); exit;
         $data = json_decode($body);
 
         if (!isset($data->client_name) || $data->client_name == '') {
