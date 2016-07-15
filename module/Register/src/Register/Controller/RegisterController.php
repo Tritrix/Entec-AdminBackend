@@ -1124,20 +1124,34 @@ class RegisterController extends AbstractActionController {
         header('Access-Control-Allow-Methods: GET, POST');
         header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
 
-        $request = $this->getRequest();
-        //print_r($_FILES); exit;
-        if ($request->isPost()) {
-            $files = $request->getFiles()->toArray();
-            $target_dir = "public/images/";
-            $target_file = $target_dir . basename($_FILES['files']['name']);
-            if (move_uploaded_file($_FILES['files']['tmp_name'], $target_file)) {
-                $resp = array('status' => 'success', 'file_path' => $target_file);
+        $body = $this->getRequest();
+        $files = $body->getFiles()->toArray();
+        $filename = $_FILES["files"]["name"];
+        $file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
+        $file_ext = substr($filename, strripos($filename, '.')); // get file name
+        $filesize = $_FILES["files"]["size"];
+        $allowed_file_types = array('.png', '.jpg', '.jpeg');
+
+        if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
+            // Rename file
+            $newfilename = round(microtime(true)).'_client_logo'. $file_ext;
+
+            if (move_uploaded_file($_FILES['files']['tmp_name'], "public/images/" . $newfilename)) {
+                $resp = array('status' => 'success', 'file_path' => "public/images/" . $newfilename);
             } else {
                 $resp = array('status' => 'failure');
             }
-            //print_r($request->getFiles()->toArray()); exit;
-            return new JsonModel($resp);
+        } elseif (empty($file_basename)) {
+            $resp = array('status' => 'failure', 'errorMessage' => 'Please select a file to upload.');
+        } elseif ($filesize > 200000) {
+            $resp = array('status' => 'failure', 'errorMessage' => 'The file you are trying to upload is too large.');
+        } else {
+            // file type error
+            $resp = array('status' => 'failure', 'errorMessage' => "Only these file typs are allowed for upload: " . implode(', ', $allowed_file_types));
+            unlink($_FILES["files"]["tmp_name"]);
         }
+
+        return new JsonModel($resp);
     }
 
     public function audituploadAction() {
@@ -1145,18 +1159,34 @@ class RegisterController extends AbstractActionController {
         header('Access-Control-Allow-Methods: GET, POST');
         header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
 
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $files = $request->getFiles()->toArray();
-            $target_dir = "public/audit/";
-            $target_file = $target_dir . basename($_FILES["files"]["name"]);
-            if (move_uploaded_file($_FILES['files']['tmp_name'], $target_file)) {
-                $resp = array('status' => 'success', 'file_path' => $target_file);
+        $body = $this->getRequest();
+        $files = $body->getFiles()->toArray();
+        $filename = $_FILES["files"]["name"];
+        $file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
+        $file_ext = substr($filename, strripos($filename, '.')); // get file name
+        $filesize = $_FILES["files"]["size"];
+        $allowed_file_types = array('.png', '.jpg', '.jpeg');
+
+        if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
+            // Rename file
+            $newfilename = round(microtime(true)).'_client_logo'. $file_ext;
+
+            if (move_uploaded_file($_FILES['files']['tmp_name'], "public/audit/" . $newfilename)) {
+                $resp = array('status' => 'success', 'file_path' => "public/audit/" . $newfilename);
             } else {
                 $resp = array('status' => 'failure');
             }
-            return new JsonModel($resp);
+        } elseif (empty($file_basename)) {
+            $resp = array('status' => 'failure', 'errorMessage' => 'Please select a file to upload.');
+        } elseif ($filesize > 200000) {
+            $resp = array('status' => 'failure', 'errorMessage' => 'The file you are trying to upload is too large.');
+        } else {
+            // file type error
+            $resp = array('status' => 'failure', 'errorMessage' => "Only these file typs are allowed for upload: " . implode(', ', $allowed_file_types));
+            unlink($_FILES["files"]["tmp_name"]);
         }
+
+        return new JsonModel($resp);
     }
 
     public function observationuploadAction() {
@@ -1164,18 +1194,35 @@ class RegisterController extends AbstractActionController {
         header('Access-Control-Allow-Methods: GET, POST');
         header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
 
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $files = $request->getFiles()->toArray();
-            $target_dir = "public/observation/";
-            $target_file = $target_dir . basename($_FILES["files"]["name"]);
-            if (move_uploaded_file($_FILES['files']['tmp_name'], $target_file)) {
-                $resp = array('status' => 'success', 'file_path' => $target_file);
+        $body = $this->getRequest();
+        $files = $body->getFiles()->toArray();
+        $filename = $_FILES["files"]["name"];
+        $file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
+        $file_ext = substr($filename, strripos($filename, '.')); // get file name
+        $filesize = $_FILES["files"]["size"];
+        $allowed_file_types = array('.png', '.jpg', '.jpeg');
+
+        if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
+            // Rename file
+            $newfilename = round(microtime(true)).'_client_logo'. $file_ext;
+
+            if (move_uploaded_file($_FILES['files']['tmp_name'], "public/observation/" . $newfilename)) {
+                $resp = array('status' => 'success', 'file_path' => "public/observation/" . $newfilename);
             } else {
                 $resp = array('status' => 'failure');
             }
-            return new JsonModel($resp);
+        } elseif (empty($file_basename)) {
+            $resp = array('status' => 'failure', 'errorMessage' => 'Please select a file to upload.');
+        } elseif ($filesize > 200000) {
+            $resp = array('status' => 'failure', 'errorMessage' => 'The file you are trying to upload is too large.');
+        } else {
+            // file type error
+            $resp = array('status' => 'failure', 'errorMessage' => "Only these file typs are allowed for upload: " . implode(', ', $allowed_file_types));
+            unlink($_FILES["files"]["tmp_name"]);
         }
+
+        return new JsonModel($resp);
+
     }
 
     public function clientuploadAction() {
@@ -1202,7 +1249,7 @@ class RegisterController extends AbstractActionController {
 
         if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
             // Rename file
-            $newfilename = round(microtime(true)).'client_logo'. $file_ext;
+            $newfilename = round(microtime(true)).'_client_logo'. $file_ext;
 
             if (move_uploaded_file($_FILES['files']['tmp_name'], "public/client/" . $newfilename)) {
                 $resp = array('status' => 'success', 'file_path' => "public/client/" . $newfilename);
