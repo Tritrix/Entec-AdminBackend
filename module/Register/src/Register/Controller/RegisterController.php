@@ -1193,10 +1193,6 @@ class RegisterController extends AbstractActionController {
 
 
         $body = $this->getRequest();
-        print_r($body);
-        if ($body->isPost()) {
-            echo "testset"; exit;
-        }
         $files = $body->getFiles()->toArray();
         $filename = $_FILES["files"]["name"];
         $file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
