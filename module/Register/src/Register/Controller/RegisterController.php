@@ -1183,6 +1183,14 @@ class RegisterController extends AbstractActionController {
         header('Access-Control-Allow-Methods: GET, POST');
         header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
 
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $files = $request->getFiles()->toArray();
+            $target_file = $target_dir . basename($_FILES["files"]["name"]);
+            print_r($target_file); exit;
+        }
+            
+            
         $body = $this->getRequest()->getContent(); print_r($body);
         $data = json_decode($body);
 print_r($data); exit;
