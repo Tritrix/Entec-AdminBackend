@@ -1183,23 +1183,18 @@ class RegisterController extends AbstractActionController {
         header('Access-Control-Allow-Methods: GET, POST');
         header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
 
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $files = $request->getFiles()->toArray();
-            $target_file = $target_dir . basename($_FILES["files"]["name"]);
-            print_r($target_file); exit;
-        }
-            
-            
-        $body = $this->getRequest()->getContent(); print_r($body);
-        $data = json_decode($body);
-print_r($data); exit;
-        if (!isset($data->client_name) || $data->client_name == '') {
-            $resp = array('status' => 'failure', 'errorCode' => 501, 'errorMessage' => 'Client Name should not be empty');
-            return new JsonModel($resp);
-        }
+//        $body = $this->getRequest()->getContent(); print_r($body);
+//        $data = json_decode($body);
+//print_r($data); exit;
+//        if (!isset($data->client_name) || $data->client_name == '') {
+//            $resp = array('status' => 'failure', 'errorCode' => 501, 'errorMessage' => 'Client Name should not be empty');
+//            return new JsonModel($resp);
+//        }
 
 
+        $body = $this->getRequest();
+        print_r($body);
+        $files = $request->getFiles()->toArray();
         $filename = $_FILES["files"]["name"];
         $file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
         $file_ext = substr($filename, strripos($filename, '.')); // get file name
