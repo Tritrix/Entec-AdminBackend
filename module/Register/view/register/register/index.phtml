@@ -1,0 +1,265 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+	<head>
+	<meta charset="utf-8">
+	<?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+	<link href='http://fonts.googleapis.com/css?family=Kreon' rel='stylesheet' type='text/css'>
+	<?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+	<!-- Le styles -->
+	<?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->appendStylesheet($this->basePath() . '/css/bootstrap.minyet.css')
+                        ->appendStylesheet($this->basePath() . '/css/landing.css')
+                        ->appendStylesheet($this->basePath() . '/css/bootstrapValidator.min.css')
+                        ->appendStylesheet($this->basePath() . '/css/datepicker3.css')
+        ?>
+
+	<!-- Scripts -->
+	<?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/jquery.min.js')
+			->appendFile($this->basePath() . '/js/bootstrapValidator.min.js')
+			->appendFile($this->basePath() . '/js/register.js')
+			->appendFile($this->basePath() . '/js/bootstrap-datepicker.js')
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+	<script type = "text/javascript">
+	
+	$(document).ready(function () {
+		$('#loginbtn').on("click", function() { 
+		
+			var log_email = $("#log_email").val();
+			var log_password = $("#log_password").val();
+			
+			//alert(log_username);
+			
+			  if (log_email == '' ) 
+			  { 
+				 // just show validation errors, dont post 
+				 alert("Please enter the valid Email Id");
+				 $("#log_username").focus();
+				 return false;
+			  } 
+			  
+			  if (log_password == '' ) 
+			  { 
+				 // just show validation errors, dont post 
+				 alert("Please enter the valid password");
+				 $("#log_password").focus();
+				 return false;
+			  }
+		
+			  return true;
+	   });
+	   
+	   
+	   
+	   
+	   $('#signup_btn').on("click", function() { 
+		
+			var firstname = $("#firstname").val();
+			var lastname = $("#lastname").val();
+			var email = $("#email").val();
+			var password = $("#password").val();
+			// var who = $("#who").val();
+					
+			
+			//alert(log_username);
+			
+			  if (firstname == '' ) 
+			  { 
+				 // just show validation errors, dont post 
+				 alert("Please enter the First Name");
+				 $("#firstname_signup").focus();
+				 return false;
+			  } 
+			  
+			  if (lastname == '' ) 
+			  { 
+				 // just show validation errors, dont post 
+				 alert("Please enter the Last Name");
+				 $("#lastname_signup").focus();
+				 return false;
+			  } 
+			
+			  if (email == '' ) 
+			  { 
+				 // just show validation errors, dont post 
+				 alert("Please enter the valid Email Id");
+				 $("#email_signup").focus();
+				 return false;
+			  } 
+			  
+			  if (password == '' ) 
+			  { 
+				 // just show validation errors, dont post 
+				 alert("Please enter the valid password");
+				 $("#password_signup").focus();
+				 return false;
+			  }
+			  
+			 
+			  
+			  return true;
+	   });
+	   
+	   
+	   
+	});   
+	</script>
+	</head>
+	<body>
+
+<!-- Nav=========================================================================================Nav -->
+
+<nav class=" navbar-custom " role="navigation">
+      <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse"> <i class="fa fa-bars"></i> </button>
+    <a href=""> <img src="img/health.png" /> </a> 
+    
+    <!-- Collect the nav links, forms, and other content for toggling --> 
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-right navbar-main-collapse" style="padding-right:50px">
+          <form method="post" action="register/login" name="login" id="login">
+        <ul class="nav navbar-nav">
+              <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+              
+              <li style="padding:10px;">
+            <input type="text" name="log_email" id="log_email" placeholder="Email Id" class=" form-control input-sm">
+          </li>
+              <li style="padding:10px;">
+            <input type="password" name="log_password" id="log_password" placeholder="Password" class="form-control input-sm">
+          </li>
+             
+              <li style="padding:10px;">
+            <button type="submit" value="Login" id="loginbtn" class="btn btn-sm btn-primary">Login </button>
+          </li>
+            </ul>
+      </form>
+        </div>
+    <!-- /.navbar-collapse --> 
+  </div>
+      
+      <!-- /.container --> 
+    </nav>
+<div class="container">
+      <div class="row">
+    <div class="col-lg-12"><br>
+          <br>
+        </div>
+    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="margin-top:90px;">
+          <center>
+        <h2>Find a Healthcare professional</h2>
+      </center>
+          <form role="form">
+        <div class="form-group input-group" style="padding:40px;"> <span class="input-group-addon input-sm "><i class="fa fa-fw fa-search"></i></span>
+              <input class="form-control input-sm" placeholder="Search" type="text">
+            </div>
+      </form>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+        <center >
+              <img src="img/docs.svg" height="64px" width="64px"/>
+              <h4>Doctors</h4>
+            </center>
+      </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+        <center >
+              <img src="img/lab.svg" height="64px" width="64px"/>
+              <h4>Labs</h4>
+            </center>
+      </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+        <center >
+              <img src="img/pharma.svg" height="64px" width="64px"/>
+              <h4>Pharma</h4>
+            </center>
+      </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 ">
+        <center >
+              <img src="img/hospital.svg" height="64px" width="64px"/>
+              <h4>Hospitals</h4>
+            </center>
+      </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <br>
+        <br>
+        <center >
+              <img src="img/patients.svg" height="100px" width="100px" />
+              <h4>Connect with your friends and Family</h4>
+            </center>
+      </div>
+        </div>
+    <div class="col-lg-5 col-md-5 col-sm-8 col-xs-10 " style="margin-top:90px; background-color:rgba(255,255,255,.5); ">
+          <form id="signup" method="post" action="register/signupyy" class="form-horizontal">
+           <?php 
+                    if ($this->flashMessenger()->hasMessages()) {
+
+                        echo '<div class="alert alert-info">';
+
+                        $messages = $this->flashMessenger()->getMessages();
+                        foreach($messages as $message) {
+                            echo $message;
+                        }
+
+                        echo '</div>';
+                    }
+
+                    ?>
+        <h2 style="padding:3px">Sign Up</h2>
+        <h4 style="padding:3px;">It only Takes a minute.</h4>
+        <div class="form-group">
+              <label class="col-lg-4 control-label">First Name</label>
+              <div class="col-lg-7">
+            <input type="text" class="form-control input-sm" name="firstname" id="firstname" style="width:100%;" />
+          </div>
+            </div>
+        <div class="form-group">
+              <label class="col-lg-4 control-label">Last Name</label>
+              <div class="col-lg-7">
+            <input type="text" class="form-control input-sm" name="lastname" id="lastname" style="width:100%;" />
+          </div>
+            </div>
+        <div class="form-group">
+              <label class="col-lg-4 control-label">Email address</label>
+              <div class="col-lg-7">
+            <input type="text" class="form-control input-sm" name="email" id="email" style="width:100%;" />
+          </div>
+            </div>
+        <div class="form-group">
+              <label class="col-lg-4 control-label">Password</label>
+              <div class="col-lg-7">
+            <input type="password" class="form-control input-sm" name="password" id="password" style="width:100%;" />
+          </div>
+            </div>
+
+        <div class="form-group">
+              <div class="col-lg-7 col-lg-offset-4"> 
+            <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
+            <button type="submit" class="btn btn-primary btn-block" id="signup_btn">Sign up</button>
+          </div>
+            </div>
+      </form>
+        </div>
+    <div class="col-lg-12"> <br>
+          <br>
+          <br>
+        </div>
+  </div>
+    </div>
+
+<!--Footer=========================================================================================Footer-->
+
+<div id="footer">
+      <div class="container">
+    <p class="text-muted credit">
+          <center>
+        Copyright © <a href="http://www.axonytes.com">Axonytes.com</a> 2014
+      </center>
+        </p>
+  </div>
+    </div>
+</body>
+</html>

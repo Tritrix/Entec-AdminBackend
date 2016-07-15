@@ -1,0 +1,279 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+		
+		
+		<link href='http://fonts.googleapis.com/css?family=Kreon' rel='stylesheet' type='text/css'>
+		
+		
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/jquery.min.js')
+			->appendFile($this->basePath() . '/js/bootstrapValidator.min.js')
+			->appendFile($this->basePath() . '/js/register.js')
+			->appendFile($this->basePath() . '/js/bootstrap-datepicker.js')
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+		
+		
+	
+	<script type = "text/javascript">
+	
+	$(document).ready(function () {
+		$('#loginbtn').on("click", function() { 
+		
+			var log_email = $("#log_email").val();
+			var log_password = $("#log_password").val();
+			var log_who = $("#log_who").val();
+			
+			//alert(log_username);
+			
+			  if (log_email == '' ) 
+			  { 
+				 // just show validation errors, dont post 
+				 alert("Please enter the valid Email Id");
+				 $("#log_username").focus();
+				 return false;
+			  } 
+			  
+			  if (log_password == '' ) 
+			  { 
+				 // just show validation errors, dont post 
+				 alert("Please enter the valid password");
+				 $("#log_password").focus();
+				 return false;
+			  }
+			  
+			   if (log_who == '' ) 
+			  { 
+				 // just show validation errors, dont post 
+				 alert("Please select user type");
+				 $("#log_who").focus();
+				 return false;
+			  }
+			  
+			  return true;
+	   });
+	});   
+	</script>
+	   
+	   
+    </head>
+    <body>
+        
+	<!-- Nav=========================================================================================Nav -->
+
+		<nav id="myNavbar" class="navbar navbar-default navbar-justified  navbar-inverse navbar-fixed-top" role="navigation" style="height:80px">
+		<!-- Brand and toggle get grouped for better mobile display -->
+
+		<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		</button>
+
+		<a class="navbar-brand" href="#">
+		<img src="img/Hori_Doc_h360.png" style="width:225px; height:75px; margin-left:35px;">
+		</a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse " id="navbarCollapse">
+
+		<!--Login Barr================================================== -->
+		<form action="register/login" method="post" name="login" id="login" class="navbar-form pull-right" style="margin-top:20px; margin-bottom:20px; margin-left:20px;">
+		<input type="text" name="log_email" id="log_email" class="span2 form-control" placeholder="Email Id">
+		<input type="password" name="log_password" id="log_password" class="span2 form-control" placeholder="Password">
+        <select class="span2 form-control" placeholder="Select any one" name="log_who" id="log_who" >
+						<option value="" default>Who am i ?</option>
+						<option value="doctor">Doctor</option>
+						<option value="patient">Patient</option>
+						<option value="pharma">Pharmacy</option>
+						<option value="lab">Diagnostic Lab</option>
+					</select>
+		<input type="submit" value="Login" id="loginbtn" class="btn-primary btn">
+		</form>
+
+
+		</div>
+		</nav>
+
+		<div class="container">
+		<div class="row">
+		<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+		<img src="img/imgbg-01.png" style="width:100%; height:100%; margin-top:50px" />
+		</div>
+
+		
+
+		<div class=" col-lg-5 col-md-5 col-sm-9 col-xs-12" style="margin-top:50px; background-color:white; border-radius:6px;">
+			<!--<form id="signup" method="post" action="" class="form-horizontal"> -->
+		
+			<?php
+			// $form = $this->form;
+			// $form->setAttribute('action', $this->url('register', array('action' => 'add')));
+			// $form->prepare();
+			// echo $this->form()->openTag($form);
+			?>
+			<form name="register" id="register" action="register/add" method="post" />
+			<h1 style="padding:3px">Sign Up</h1>
+            
+                    
+                    <div >
+                    <?php 
+                    if ($this->flashMessenger()->hasMessages()) {
+                        
+                        echo '<div class="alert alert-info">';
+
+                        $messages = $this->flashMessenger()->getMessages();
+                        foreach($messages as $message) {
+                            echo $message;
+                        }
+
+                        echo '</div>';
+                    } 
+                    ?>
+                    
+                    
+			<h4 style="padding:3px;">It only Takes a minute.</h4>
+		
+		
+			<div class="form-group">
+			<label class="col-lg-4 control-label">First Name</label>
+			<div class="col-lg-7">
+			<input type="text" class="form-control" name="firstname" style="width:100%;" />
+			</div>
+			</div>
+
+			<div class="form-group">
+			<label class="col-lg-4 control-label">Last Name</label>
+			<div class="col-lg-7">
+			<input type="text" class="form-control" name="lastname" style="width:100%;" />
+			</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-lg-4 control-label">Gender</label>
+				<div class="col-lg-5">
+					<div class="radio">
+						<label>
+							<input type="radio" name="gender" value="male" />Male
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="gender" value="female" />Female
+						</label>
+					</div>
+				</div>
+			</div>
+			
+			<!--
+			<div class="form-group">
+				<label class="col-lg-4 control-label">Date of birth</label>
+				<div class="col-lg-7">
+					<input type="text" id="dob" class="form-control" name="birthday" placeholder="DD/MM/YYYY" style="width:100%;" />
+				</div>
+			</div> -->
+			
+			
+
+			<div class="form-group">
+				<label class="col-lg-4 control-label">Email address</label>
+				<div class="col-lg-7">
+					<input type="text" class="form-control" name="email" style="width:100%;" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-lg-4 control-label">Password</label>
+				<div class="col-lg-7">
+					<input type="password" class="form-control" name="password" style="width:100%;" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-4 control-label">Who am i ?</label>
+				<div class="col-lg-7">
+					<select class="form-control" placeholder="Select any one" name="who" style="width:100%;">
+						<option value="" default>Select an Option</option>
+						<option value="doctor">Doctor</option>
+						<option value="patient">Patient</option>
+						<option value="pharma">Pharmacy</option>
+						<option value="lab">Diagnostic Lab</option>
+
+
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-group" style="padding-bottom:20px; ">
+				<div class="col-lg-7 col-lg-offset-3">
+					&nbsp;
+				</div>
+			</div>
+			
+			
+			<div class="form-group" style="padding-bottom:20px; ">
+				<div class="col-lg-7 col-lg-offset-3">
+					<button type="submit" class="btn btn-primary btn-block">Sign up</button>
+				</div>
+			</div>
+			
+			
+			<div class="form-group" style="padding-bottom:20px; ">
+				<div class="col-lg-7 col-lg-offset-3">
+					&nbsp;
+				</div>
+			</div>
+		
+		
+		
+			<?php echo $this->form()->closeTag(); ?>
+			<!-- </form> -->
+			</div>
+		</div>
+		</div>
+		</div>
+
+		<!--Footer=========================================================================================Footer-->
+
+
+
+		<footer class="noise footer-noise footer" style="margin-top:2%">
+		<div style="padding:0px;">
+		<div class=" col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-10 col-xs-12">
+		<center>
+		<img src="img/fb.png" style="margin-left:5px; margin-right:5px;" />
+		<img src="img/G+.png" style="margin-left:5px; margin-right:5px;" />
+		<img src="img/linkedin.png" style="margin-left:5px; margin-right:5px;" />
+
+		</center>
+		</div>
+		<div style="clear:both;"></div>
+		<hr style="border-color:grey;">
+		<div class="col-md-offset-2 col-lg-offset-3 col-lg-6 col-md-9 col-sm-12 col-xs-12">
+		<center>&copy;Copyright 2014 Axonytes Pvt Ltd</center>
+		</div>
+
+
+		</div>
+		</footer>
+    </body>
+</html>
