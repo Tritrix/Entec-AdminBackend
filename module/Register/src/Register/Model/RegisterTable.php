@@ -61,7 +61,7 @@ class RegisterTable extends AbstractTableGateway {
         }
     }
 
-    public function addclient($data,$logoPath) {
+    public function addclient($data) {
         $refnumber = md5($data->id . time());
         $refnumber = substr($refnumber, -6);
 
@@ -108,7 +108,7 @@ class RegisterTable extends AbstractTableGateway {
             '" . $data->state . "',
             '" . $data->country . "',
             '" . $data->pincode . "',
-            '" . $logoPath . "',
+            '" . $data->logo_path . "',
             '" . $data->contactperson . "',
             now(),
             '" . $data->id . "',

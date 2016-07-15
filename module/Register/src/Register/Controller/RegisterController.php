@@ -82,18 +82,18 @@ class RegisterController extends AbstractActionController
         header('Access-Control-Allow-Methods: GET, POST');
         header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
     
-        $request = $this->getRequest();
-          if($request->isPost()) { 
-                $target_dir = "public/clientlogo/";
-                $today = date("F j, Y, g:i a"); 
-                $target_file = $target_dir .$today. basename($_FILES["files"]["name"]);
-                if (move_uploaded_file($_FILES['files']['tmp_name'], $target_file)) {
-                         $logoPath = $target_file;
-                } else {
-                         $resp = array('status' => 'failure');
-                         return new JsonModel($resp);
-                }
-          } 
+//        $request = $this->getRequest();
+//          if($request->isPost()) { 
+//                $target_dir = "public/clientlogo/";
+//                $today = date("F j, Y, g:i a"); 
+//                $target_file = $target_dir .$today. basename($_FILES["files"]["name"]);
+//                if (move_uploaded_file($_FILES['files']['tmp_name'], $target_file)) {
+//                         $logoPath = $target_file;
+//                } else {
+//                         $resp = array('status' => 'failure');
+//                         return new JsonModel($resp);
+//                }
+//          } 
           
         $body = $this->getRequest()->getContent();
         $data = json_decode($body);
@@ -133,7 +133,7 @@ class RegisterController extends AbstractActionController
 		$sm = $this->getServiceLocator();
 		$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
         $registerService = new RegisterService($dbAdapter);
-        $resp = $registerService->addclient($data,$logoPath);
+        $resp = $registerService->addclient($data);
         
         
         if(isset($resp) && (@$resp['errorCode'] == '513')) {
@@ -1304,7 +1304,7 @@ class RegisterController extends AbstractActionController
                   $target_dir = "public/client/";
                   $target_file = $target_dir . basename($_FILES["files"]["name"]);
                   if (move_uploaded_file($_FILES['files']['tmp_name'], $target_file)) {
-                           $resp =array('status' => 'success');
+                           $resp =array('status' => 'success','file_path' => $target_file);
                   } else {
                            $resp = array('status' => 'failure');
                   }

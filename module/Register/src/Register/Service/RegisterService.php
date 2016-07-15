@@ -32,10 +32,10 @@ class RegisterService
         return $res;
     }
     
-     public function addclient($data,$logoPath)
+     public function addclient($data)
     {
 		$registerTable = new RegisterTable($this->adapter);
-		$res = $registerTable->addclient($data,$logoPath);	
+		$res = $registerTable->addclient($data);	
         return $res;
     }
     
