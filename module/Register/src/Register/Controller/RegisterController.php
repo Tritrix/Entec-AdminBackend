@@ -1194,7 +1194,7 @@ class RegisterController extends AbstractActionController {
 
         $body = $this->getRequest();
         print_r($body);
-        if ($request->isPost()) {
+        if ($body->isPost()) {
             echo "testset"; exit;
         }
         $files = $body->getFiles()->toArray();
