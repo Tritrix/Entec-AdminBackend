@@ -1193,10 +1193,6 @@ class RegisterController extends AbstractActionController {
 
 
         $body = $this->getRequest();
-        print_r($body);
-        if ($body->isPost()) {
-            echo "testset"; exit;
-        }
         $files = $body->getFiles()->toArray();
         $filename = $_FILES["files"]["name"];
         $file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
@@ -1206,7 +1202,7 @@ class RegisterController extends AbstractActionController {
 
         if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
             // Rename file
-            $newfilename = $data->client_name . $file_ext;
+            $newfilename = round(microtime(true)).'client_logo'. $file_ext;
 
             if (move_uploaded_file($_FILES['files']['tmp_name'], "public/client/" . $newfilename)) {
                 $resp = array('status' => 'success', 'file_path' => "public/client/" . $newfilename);
