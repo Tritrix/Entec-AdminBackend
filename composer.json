@@ -1,18 +1,16 @@
 {
-    "name": "zendframework/skeleton-application",
-    "description": "Skeleton Application for ZF2",
-    "license": "BSD-3-Clause",
-    "keywords": [
-        "framework",
-        "zf2"
-    ],
-    "homepage": "http://framework.zend.com/",
+    "name": "entec-pest-control",
+    "description": "Controlling pests",
+    "version": "1.0.0",
+    "homepage": "http://www.entecin.com/",
     "require": {
-        "php": ">=5.3.3",
-        "zendframework/zendframework": "2.3.*",
-	"dino/dompdf-module": "dev-master"
+        "php": "~5.6",
+	"zendframework/zendframework": "2.5.3",
+        "dino/dompdf-module": "v0.2.0",
+        "predis/predis": "1.0"
     },
     "require-dev": {
-        
+        "phpunit/phpunit": "5.0.0",
+        "squizlabs/php_codesniffer": "2.5.1"
     }
 }

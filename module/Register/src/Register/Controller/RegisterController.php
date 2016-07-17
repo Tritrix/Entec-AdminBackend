@@ -18,6 +18,9 @@ use Register\Service\RegisterService;
 use Zend\Cache\StorageFactory;
 use Zend\Service\Manager\ServiceLocatorInterface;
 use Zend\EventManager\EventManagerAware;
+use DOMPDFModule\View\Model\PdfModel;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class RegisterController extends AbstractActionController {
 
@@ -1138,7 +1141,7 @@ class RegisterController extends AbstractActionController {
 
         if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
             // Rename file
-            $newfilename = round(microtime(true)).'_client_logo'. $file_ext;
+            $newfilename = round(microtime(true)) . '_client_logo' . $file_ext;
 
             if (move_uploaded_file($_FILES['files']['tmp_name'], "public/images/" . $newfilename)) {
                 $resp = array('status' => 'success', 'file_path' => "public/images/" . $newfilename);
@@ -1173,7 +1176,7 @@ class RegisterController extends AbstractActionController {
 
         if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
             // Rename file
-            $newfilename = round(microtime(true)).'_client_logo'. $file_ext;
+            $newfilename = round(microtime(true)) . '_client_logo' . $file_ext;
 
             if (move_uploaded_file($_FILES['files']['tmp_name'], "public/audit/" . $newfilename)) {
                 $resp = array('status' => 'success', 'file_path' => "public/audit/" . $newfilename);
@@ -1208,7 +1211,7 @@ class RegisterController extends AbstractActionController {
 
         if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
             // Rename file
-            $newfilename = round(microtime(true)).'_client_logo'. $file_ext;
+            $newfilename = round(microtime(true)) . '_client_logo' . $file_ext;
 
             if (move_uploaded_file($_FILES['files']['tmp_name'], "public/observation/" . $newfilename)) {
                 $resp = array('status' => 'success', 'file_path' => "public/observation/" . $newfilename);
@@ -1226,7 +1229,6 @@ class RegisterController extends AbstractActionController {
         }
 
         return new JsonModel($resp);
-
     }
 
     public function clientuploadAction() {
@@ -1253,7 +1255,7 @@ class RegisterController extends AbstractActionController {
 
         if (in_array($file_ext, $allowed_file_types) && ($filesize < 200000)) {
             // Rename file
-            $newfilename = round(microtime(true)).'_client_logo'. $file_ext;
+            $newfilename = round(microtime(true)) . '_client_logo' . $file_ext;
 
             if (move_uploaded_file($_FILES['files']['tmp_name'], "public/client/" . $newfilename)) {
                 $resp = array('status' => 'success', 'file_path' => "public/client/" . $newfilename);
@@ -1271,6 +1273,20 @@ class RegisterController extends AbstractActionController {
         }
 
         return new JsonModel($resp);
+    }
+
+    public function pdftestAction() {
+        
+        $html = 'html>
+  <body>
+      <h1>My Name is $name</h1>
+  </body>
+</html>';
+        
+        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
+$dompdf->loadHtml($html);
+$dompdf->render();
+$dompdf->stream("sample.pdf", array("Attachment"=>0));
     }
 
 }

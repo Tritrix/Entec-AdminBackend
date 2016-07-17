@@ -308,6 +308,17 @@ return array(
                 ),
             ),
 			
+            'pdftest' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/api/v1/users/pdftest',
+                    'defaults' => array(
+                        'controller' => 'Register\Controller\Register',
+                        'action' => 'pdftest',
+                    ),
+                ),
+            ),
+			
              
             
         ),
