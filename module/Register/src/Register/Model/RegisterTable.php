@@ -108,7 +108,7 @@ class RegisterTable extends AbstractTableGateway {
             '" . $data->state . "',
             '" . $data->country . "',
             '" . $data->pincode . "',
-            '" . $data->logo_path . "',
+            '" . $data->client_logo . "',
             '" . $data->contactperson . "',
             now(),
             '" . $data->id . "',
