@@ -1144,7 +1144,7 @@ class RegisterController extends AbstractActionController {
             $newfilename = round(microtime(true)) . '_client_logo' . $file_ext;
 
             if (move_uploaded_file($_FILES['files']['tmp_name'], "public/images/" . $newfilename)) {
-                $resp = array('status' => 'success', 'file_path' => "public/images/" . $newfilename);
+                $resp = array('status' => 'success', 'file_path' => "images/" . $newfilename);
             } else {
                 $resp = array('status' => 'failure');
             }
@@ -1179,7 +1179,7 @@ class RegisterController extends AbstractActionController {
             $newfilename = round(microtime(true)) . '_client_logo' . $file_ext;
 
             if (move_uploaded_file($_FILES['files']['tmp_name'], "public/audit/" . $newfilename)) {
-                $resp = array('status' => 'success', 'file_path' => "public/audit/" . $newfilename);
+                $resp = array('status' => 'success', 'file_path' => "audit/" . $newfilename);
             } else {
                 $resp = array('status' => 'failure');
             }
@@ -1214,7 +1214,7 @@ class RegisterController extends AbstractActionController {
             $newfilename = round(microtime(true)) . '_client_logo' . $file_ext;
 
             if (move_uploaded_file($_FILES['files']['tmp_name'], "public/observation/" . $newfilename)) {
-                $resp = array('status' => 'success', 'file_path' => "public/observation/" . $newfilename);
+                $resp = array('status' => 'success', 'file_path' => "observation/" . $newfilename);
             } else {
                 $resp = array('status' => 'failure');
             }
@@ -1258,7 +1258,7 @@ class RegisterController extends AbstractActionController {
             $newfilename = round(microtime(true)) . '_client_logo' . $file_ext;
 
             if (move_uploaded_file($_FILES['files']['tmp_name'], "public/client/" . $newfilename)) {
-                $resp = array('status' => 'success', 'file_path' => "public/client/" . $newfilename);
+                $resp = array('status' => 'success', 'file_path' => "client/" . $newfilename);
             } else {
                 $resp = array('status' => 'failure');
             }
