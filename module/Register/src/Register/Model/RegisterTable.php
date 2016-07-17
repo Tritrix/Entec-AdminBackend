@@ -610,7 +610,7 @@ class RegisterTable extends AbstractTableGateway {
 
             $select->join(array('client' => 'client'), 'audit.client_id = client.client_id', array('*'), $select::JOIN_LEFT); 
 
-//            $select->join(array('user' => 'user'), 'audit.auditor = user.userid', array('*'), $select::JOIN_LEFT); 
+            $select->join(array('user' => 'user'), 'audit.auditor = user.userid', array('*'), $select::JOIN_LEFT); 
             // $where = new  Where();
             // $where->equalTo( 'audit.audit_id', $data->audit_id );
             // $select->where($where);
