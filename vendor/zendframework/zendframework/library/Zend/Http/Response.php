@@ -124,7 +124,7 @@ class Response extends AbstractMessage implements ResponseInterface
         411 => 'Length Required',
         412 => 'Precondition Failed',
         413 => 'Request Entity Too Large',
-        414 => 'Request-URI Too Large',
+        414 => 'Request-URI Too Long',
         415 => 'Unsupported Media Type',
         416 => 'Requested range not satisfiable',
         417 => 'Expectation Failed',
@@ -202,11 +202,22 @@ class Response extends AbstractMessage implements ResponseInterface
                 $isHeader = false;
                 continue;
             }
+
             if ($isHeader) {
+                if (preg_match("/[\r\n]/", $line)) {
+                    throw new Exception\RuntimeException('CRLF injection detected');
+                }
                 $headers[] = $line;
-            } else {
-                $content[] = $line;
+                continue;
             }
+
+            if (empty($content)
+                && preg_match('/^[a-z0-9!#$%&\'*+.^_`|~-]+:$/i', $line)
+            ) {
+                throw new Exception\RuntimeException('CRLF injection detected');
+            }
+
+            $content[] = $line;
         }
 
         if ($headers) {

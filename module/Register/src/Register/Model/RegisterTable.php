@@ -303,7 +303,7 @@ class RegisterTable extends AbstractTableGateway {
                 $statement = $this->adapter->query($sql_adduser);
                 $res = $statement->execute();
 
-                $response = array('id' => $data->id, 'status' => 'success');
+                $response = array('id' => $data->id, 'status' => 'success','errorCode' => NULL,);
             } catch (\Exception $e) {
                 $msg = $e->getMessage();
                 if (strpos($msg, "1062") !== false) {

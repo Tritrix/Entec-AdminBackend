@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Zend\\' => array($vendorDir . '/zendframework/zendframework/library'),
-    'ZendXml' => array($vendorDir . '/zendframework/zendxml/library'),
+    'ZendXml\\' => array($vendorDir . '/zendframework/zendxml/library'),
+    'DOMPDFModule' => array($vendorDir . '/dino/dompdf-module/src'),
 );

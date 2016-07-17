@@ -3,32 +3,45 @@
 # Welcome to the *Zend Framework 2.3* Release!
 
 Master:
-[![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=master)](http://travis-ci.org/zendframework/zf2)
-[![Coverage Status](https://coveralls.io/repos/zendframework/zf2/badge.png?branch=master)](https://coveralls.io/r/zendframework/zf2)
+[![Build Status](https://secure.travis-ci.org/zendframework/zf2.svg?branch=master)](http://travis-ci.org/zendframework/zf2)
+[![Coverage Status](https://coveralls.io/repos/zendframework/zf2/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zf2)
 Develop:
-[![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=develop)](http://travis-ci.org/zendframework/zf2)
-[![Coverage Status](https://coveralls.io/repos/zendframework/zf2/badge.png?branch=develop)](https://coveralls.io/r/zendframework/zf2)
+[![Build Status](https://secure.travis-ci.org/zendframework/zf2.svg?branch=develop)](http://travis-ci.org/zendframework/zf2)
+[![Coverage Status](https://coveralls.io/repos/zendframework/zf2/badge.svg?branch=develop)](https://coveralls.io/r/zendframework/zf2)
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.4*
+*Zend Framework 2.3.9*
 
-This is the fourth maintenance release for the version 2.3 series.
+This is the ninth maintenance release for the version 2.3 series.
 
-14 Jan 2015
+11 May 2015
 
-### UPDATES IN 2.3.4
+### UPDATES IN 2.3.9
 
-This release contains important security fixes:
+This release contains the following security fixes introduced in 2.3.8:
 
-- **ZF2015-01:** Session validators were not run if set before session start.
-  Essentially, the validators were writing to the `$_SESSION` superglobal before
-  session start, which meant the data was overwritten once the session began.
-  This meant on subsequent calls, the validators had no data to compare against,
-  making the sessions automatically valid. We have provided patches to ensure
-  that validators are run only after the session has begun, which will ensure
-  they validate sessions correctly going forward. If you use `Zend\Session`
-  validators, we recommend upgrading immediately.
+- **ZF2015-04**: `Zend\Mail` and `Zend\Http` were both susceptible to CRLF
+  Injection Attack vectors (for HTTP, this is often referred to as HTTP Response
+  Splitting). Both components were updated to perform header value validations
+  to ensure no values contain characters not detailed in their corresponding
+  specifications, and will raise exceptions on detection. Each also provides new
+  facilities for both validating and filtering header values prior to injecting
+  them into header classes.
+
+  If you use either `Zend\Mail` or `Zend\Http` (which includes users of
+  `Zend\Mvc`), we recommend upgrading immediately.
+
+Additionally, this release fixes several issues raised by the patch for the
+above security fix, including:
+
+- [#7506](https://github.com/zendframework/zf2/pull/7506) resolves issues when
+  UTF-8 values are used in Mail headers, particularly addresses.
+- [#7507](https://github.com/zendframework/zf2/pull/7507) ensures that array
+  values can be used with cookies.
+- [#7514](https://github.com/zendframework/zf2/pull/7514) ensures that multipart
+  MIME messages can be added to `Zend\Mail\Message` instances in such a way that
+  they do not conflict with ZF2015-04.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

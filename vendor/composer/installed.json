@@ -1,27 +1,27 @@
 [
     {
         "name": "zendframework/zendxml",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/zendframework/ZendXml.git",
-            "reference": "559b34f426d33a11c3db118e00ce14bb8dc64e5f"
+            "reference": "7b64507bc35d841c9c5802d67f6f87ef8e1a58c9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/ZendXml/zipball/559b34f426d33a11c3db118e00ce14bb8dc64e5f",
-            "reference": "559b34f426d33a11c3db118e00ce14bb8dc64e5f",
+            "url": "https://api.github.com/repos/zendframework/ZendXml/zipball/7b64507bc35d841c9c5802d67f6f87ef8e1a58c9",
+            "reference": "7b64507bc35d841c9c5802d67f6f87ef8e1a58c9",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3"
+            "php": "^5.3.3 || ^7.0"
         },
         "require-dev": {
-            "fabpot/php-cs-fixer": "*@dev",
-            "phpunit/phpunit": "~3.7"
+            "phpunit/phpunit": "^3.7 || ^4.0",
+            "squizlabs/php_codesniffer": "^1.5"
         },
-        "time": "2014-03-05 22:25:44",
+        "time": "2016-02-04 21:02:08",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -31,7 +31,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-0": {
-                "ZendXml": "library/"
+                "ZendXml\\": "library/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -48,17 +48,17 @@
     },
     {
         "name": "zendframework/zendframework",
-        "version": "2.3.4",
-        "version_normalized": "2.3.4.0",
+        "version": "2.3.9",
+        "version_normalized": "2.3.9.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/zendframework/zf2.git",
-            "reference": "c878e047ab1c5dcfb201974bdff607be54ccb54b"
+            "url": "https://github.com/zendframework/zendframework.git",
+            "reference": "32858f883fffb5eef9f610b538ed026f6033b6de"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zf2/zipball/c878e047ab1c5dcfb201974bdff607be54ccb54b",
-            "reference": "c878e047ab1c5dcfb201974bdff607be54ccb54b",
+            "url": "https://api.github.com/repos/zendframework/zendframework/zipball/32858f883fffb5eef9f610b538ed026f6033b6de",
+            "reference": "32858f883fffb5eef9f610b538ed026f6033b6de",
             "shasum": ""
         },
         "require": {
@@ -136,7 +136,7 @@
             "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
             "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
         },
-        "time": "2015-01-14 16:44:17",
+        "time": "2015-05-11 16:03:51",
         "bin": [
             "bin/classmap_generator.php",
             "bin/pluginmap_generator.php",
@@ -163,6 +163,130 @@
         "homepage": "http://framework.zend.com/",
         "keywords": [
             "framework",
+            "zf2"
+        ]
+    },
+    {
+        "name": "phenx/php-font-lib",
+        "version": "0.2.2",
+        "version_normalized": "0.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PhenX/php-font-lib.git",
+            "reference": "c30c7fc00a6b0d863e9bb4c5d5dd015298b2dc82"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PhenX/php-font-lib/zipball/c30c7fc00a6b0d863e9bb4c5d5dd015298b2dc82",
+            "reference": "c30c7fc00a6b0d863e9bb4c5d5dd015298b2dc82",
+            "shasum": ""
+        },
+        "time": "2014-02-01 15:22:28",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "classes/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Ménager",
+                "email": "fabien.menager@gmail.com"
+            }
+        ],
+        "description": "A library to read, parse, export and make subsets of different types of font files.",
+        "homepage": "https://github.com/PhenX/php-font-lib"
+    },
+    {
+        "name": "dompdf/dompdf",
+        "version": "v0.6.2",
+        "version_normalized": "0.6.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dompdf/dompdf.git",
+            "reference": "cc06008f75262510ee135b8cbb14e333a309f651"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/dompdf/dompdf/zipball/cc06008f75262510ee135b8cbb14e333a309f651",
+            "reference": "cc06008f75262510ee135b8cbb14e333a309f651",
+            "shasum": ""
+        },
+        "require": {
+            "phenx/php-font-lib": "0.2.*"
+        },
+        "time": "2015-12-07 04:07:13",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "include/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Ménager",
+                "email": "fabien.menager@gmail.com"
+            },
+            {
+                "name": "Brian Sweeney",
+                "email": "eclecticgeek@gmail.com"
+            }
+        ],
+        "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
+        "homepage": "https://github.com/dompdf/dompdf"
+    },
+    {
+        "name": "dino/dompdf-module",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/raykolbe/DOMPDFModule.git",
+            "reference": "ebb367877e25a39e597b529abd25f5390422253b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/raykolbe/DOMPDFModule/zipball/ebb367877e25a39e597b529abd25f5390422253b",
+            "reference": "ebb367877e25a39e597b529abd25f5390422253b",
+            "shasum": ""
+        },
+        "require": {
+            "dompdf/dompdf": "0.6.*",
+            "php": ">=5.3.0"
+        },
+        "time": "2014-04-18 00:18:45",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "DOMPDFModule": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Raymond Kolbe",
+                "email": "raymond.kolbe@maine.edu"
+            }
+        ],
+        "description": "A Zend Framework 2 module for incorporating DOMPDF support.",
+        "homepage": "http://raymondkolbe.com",
+        "keywords": [
+            "dompdf",
+            "pdf",
             "zf2"
         ]
     }

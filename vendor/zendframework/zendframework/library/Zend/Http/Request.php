@@ -93,6 +93,13 @@ class Request extends AbstractMessage implements RequestInterface
         $request->setMethod($matches['method']);
         $request->setUri($matches['uri']);
 
+        $parsedUri = parse_url($matches['uri']);
+        if (array_key_exists('query', $parsedUri)) {
+            $parsedQuery = array();
+            parse_str($parsedUri['query'], $parsedQuery);
+            $request->setQuery(new Parameters($parsedQuery));
+        }
+
         if (isset($matches['version'])) {
             $request->setVersion($matches['version']);
         }
@@ -109,11 +116,23 @@ class Request extends AbstractMessage implements RequestInterface
                 $isHeader = false;
                 continue;
             }
+
             if ($isHeader) {
+                if (preg_match("/[\r\n]/", $nextLine)) {
+                    throw new Exception\RuntimeException('CRLF injection detected');
+                }
                 $headers[] = $nextLine;
-            } else {
-                $rawBody[] = $nextLine;
+                continue;
             }
+
+
+            if (empty($rawBody)
+                && preg_match('/^[a-z0-9!#$%&\'*+.^_`|~-]+:$/i', $nextLine)
+            ) {
+                throw new Exception\RuntimeException('CRLF injection detected');
+            }
+
+            $rawBody[] = $nextLine;
         }
 
         if ($headers) {

@@ -9,7 +9,8 @@
     "homepage": "http://framework.zend.com/",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "2.3.*"
+        "zendframework/zendframework": "2.3.*",
+	"dino/dompdf-module": "dev-master"
     },
     "require-dev": {
         
