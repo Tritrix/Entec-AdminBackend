@@ -147,10 +147,28 @@ class RegisterTable extends AbstractTableGateway {
         $resp = array();
         if ($result->count() >= 1) {
 
-            $sql_clientlist = "SELECT * FROM `client` WHERE is_active != 0 ORDER BY created_by;";
+            //$sql_clientlist = "SELECT * FROM `client` WHERE is_active != 0 ORDER BY created_by;";
 
-            // echo $sql_clientlist; exit;
-            $statement = $this->adapter->query($sql_clientlist);
+            $sql = new Sql($this->adapter);
+            $select = $sql->select();
+            $select->columns(array('*'));
+            $select->from('client');
+
+//            $select->join(array('client' => 'client'), 'audit.client_id = client.client_id', array('*'), $select::JOIN_LEFT);
+//
+//            $select->join(array('user' => 'user'), 'audit.auditor = user.userid', array('*'), $select::JOIN_LEFT);
+
+            $where = new Where();
+            $where->equalTo('client.is_active', 1);
+
+            if(isset($data->client_id) && !empty($data->client_id))
+            {
+                $where->equalTo('client.client_id', $data->client_id);
+            }
+            
+            $select->where($where);
+            //echo $select->getSqlString($this->adapter->getPlatform()); exit;
+            $statement = $sql->prepareStatementForSqlObject($select);
             $result = $statement->execute();
             $rows = array_values(iterator_to_array($result));
 
@@ -645,12 +663,13 @@ class RegisterTable extends AbstractTableGateway {
 
             $select->join(array('user' => 'user'), 'audit.auditor = user.userid', array('*'), $select::JOIN_LEFT);
 
-
-
             $where = new Where();
-            $where->equalTo('audit.client_id', $data->clientid);
+            $where->equalTo('audit.client_id', $data->client_id);
+
+            
             $select->where($where);
             $statement = $sql->prepareStatementForSqlObject($select);
+            //echo $select->getSqlString($this->adapter->getPlatform()); exit;
             $result = $statement->execute();
 
 
@@ -688,6 +707,7 @@ class RegisterTable extends AbstractTableGateway {
             `observation_responsibility`,
             `observation_priority`,
             `observation_status`,
+            `observation_image`,
              `audit_id`,
             `created_by`,
             `created_date` 
@@ -697,6 +717,7 @@ class RegisterTable extends AbstractTableGateway {
             '" . $data->observation_responsibility . "', 
             '" . $data->observation_priority . "', 
             '" . $data->observation_status . "', 
+            '" . $data->observation_image . "', 
              '" . $data->audit_id . "',
             '" . $data->id . "',
              now() 

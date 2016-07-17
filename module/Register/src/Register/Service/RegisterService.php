@@ -152,7 +152,10 @@ class RegisterService
     {
 		$registerTable = new RegisterTable($this->adapter);
 		$res = $registerTable->listobservation($data);	
-        return $res;
+		$resclient = $registerTable->listclient($data);
+        
+                $listObservation = array("observations" => $res,"client" => $resclient);
+                return $listObservation;
     }
     
       public function logoutadmin($data)

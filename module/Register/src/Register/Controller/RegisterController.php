@@ -803,7 +803,7 @@ class RegisterController extends AbstractActionController {
             return new JsonModel($resp);
         }
 
-        if (!isset($data->clientid) || $data->clientid == '') {
+        if (!isset($data->client_id) || $data->client_id == '') {
             $resp = array('status' => 'failure', 'errorCode' => 501, 'errorMessage' => 'Client Id should not be empty');
             return new JsonModel($resp);
         }
@@ -973,6 +973,10 @@ class RegisterController extends AbstractActionController {
         }
         if (!isset($data->audit_id) || $data->audit_id == '') {
             $resp = array('status' => 'failure', 'errorCode' => 501, 'errorMessage' => 'Audit id should not be empty');
+            return new JsonModel($resp);
+        }
+        if (!isset($data->client_id) || $data->client_id == '') {
+            $resp = array('status' => 'failure', 'errorCode' => 501, 'errorMessage' => 'Client id should not be empty');
             return new JsonModel($resp);
         }
 
