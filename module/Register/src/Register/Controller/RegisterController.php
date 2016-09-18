@@ -1276,17 +1276,24 @@ class RegisterController extends AbstractActionController {
     }
 
     public function pdftestAction() {
+//        $html = 'html> <body> <h1>My Name is $name</h1> </body> </html>';
+//        print_r("asdfasdfasd asdf adsf asd"); exit;
+//        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
+//        $dompdf->loadHtml($html);
+//        $dompdf->render();
+//        $dompdf->stream("sample.pdf", array("Attachment"=>0));
         
-        $html = 'html>
-  <body>
-      <h1>My Name is $name</h1>
-  </body>
-</html>';
-        
-        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
-$dompdf->loadHtml($html);
-$dompdf->render();
-$dompdf->stream("sample.pdf", array("Attachment"=>0));
+        $pdf = new PdfModel();
+        $pdf->setOption('filename', 'monthly-report'); // Triggers PDF download, automatically appends ".pdf"
+        $pdf->setOption('paperSize', 'a4'); // Defaults to "8x11"
+        $pdf->setOption('paperOrientation', 'landscape'); // Defaults to "portrait"
+
+        // To set view variables
+        $pdf->setVariables(array(
+          'message' => 'Hello'
+        ));
+
+        return $pdf;
     }
 
 }

@@ -4,6 +4,7 @@ return array(
     'modules' => array(
 		'Users',
 		'Register',
+		'DOMPDFModule',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
